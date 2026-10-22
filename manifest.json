@@ -1,0 +1,11 @@
+{
+    "name": "Weather App",
+    "start_url": "./",
+    "display": "fullscreen",
+    "icons": [
+        {
+            "src": "./src/assets/icons/meteorology.png",
+            "sizes": "512x512"
+        }
+    ]
+}
