@@ -1,32 +1,29 @@
-// fallback hvis vi ikke kan få en position (aalborg friis)
-const fallback = { lat: 57.0253, long: 9.5537 }
-
-// Henter brugerens position og returnerer et Promise med { lat, long }.
-// Promiset afvises (reject) aldrig – ved fejl får man altid fallback-positionen,
-// så den kaldende kode ikke behøver en .catch()
-
+// This is my location ( Aalborg Friis)
+const myLocation = { lat: 57.0253, long: 9.5537 }
 
 export function getLocation() {
-    // opsæt promise så vi kan afvikle flere forskellige processer
+    // The function never rejects. It always resolve with {lat: ..., long: ...}, either from the user's device or from 'myLocation'
     return new Promise((resolve) => {
-        // Tjek om browseren overhovedet understøtter geolocation
+        // This will check if your browser support geolocator
         if (!navigator.geolocation) {
-            console.log("Geolocation is not supported by your browser")
-            // return stopper funktionen her, så vi ikke også kalder getCurrentPosition
-            return resolve(fallback)
+            console.log("Geolocator is not supported by your browser")
+
+            // The return stops the function, preventing it to call for our current location
+            return resolve(myLocation)
         }
 
-        // Spørg browseren om positionen (brugeren skal give tilladelse).
-        // Metoden er asynkron og tager to callbacks: én ved succes og én ved fejl
+        // Ask the browser for permission get the user's location
+        // getCurrentPosition is already built-in function from Geolocator API
         navigator.geolocation.getCurrentPosition(
-            // Succes: pluk bredde- og længdegrad ud af coords og send dem videre i vores eget format
+            // This run the success callback
             (position) => resolve({ lat: position.coords.latitude, long: position.coords.longitude }),
-
-            // Fejl: fx hvis brugeren afviser, eller positionen ikke kan findes
             () => {
+                // This will only run when the user refuse to give us the location
                 console.log("no pos error")
-                resolve(fallback)
+
+                resolve(myLocation)
             }
         )
     })
 }
+

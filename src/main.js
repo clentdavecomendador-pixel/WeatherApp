@@ -11,5 +11,4 @@ const app = document.getElementById("app")
 const forecast = document.createElement("div")
 forecast.id = "forecast"
 
-app.append(headerView(), forecast)
-initWeather()
+app.append(headerView(), initWeather())
