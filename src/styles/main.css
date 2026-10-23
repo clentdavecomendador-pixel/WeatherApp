@@ -1,4 +1,17 @@
-body{
+body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(20deg, #0D47A1, #E3F2FD);
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    text-align: center;
+
+    h1 {
+        color: #FFFFFF;
+        margin: 0;
+        padding: 1rem;
+    }
 }
