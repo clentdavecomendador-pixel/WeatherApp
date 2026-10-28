@@ -78,3 +78,19 @@ export function getWeatherIcon(code) {
 
     return `${iconFolder}${iconName}.svg`
 }
+
+export function getWeatherDescription(code) {
+    if ([0].includes(code)) return "Klart"
+    if ([1].includes(code)) return "Overvejende klart"
+    if ([2].includes(code)) return "Delvist skyet"
+    if ([3].includes(code)) return "Overskyet"
+    if ([45, 48].includes(code)) return "Tåge"
+    if ([51, 53, 55].includes(code)) return "Støvregn"
+    if ([56, 57, 66, 67].includes(code)) return "Isslag"
+    if ([61, 63, 65].includes(code)) return "Regn"
+    if ([71, 73, 75, 77].includes(code)) return "Sne"
+    if ([80, 81, 82].includes(code)) return "Regnbyger"
+    if ([85, 86].includes(code)) return "Snebyger"
+    if ([95, 96, 99].includes(code)) return "Torden"
+    return "Ukendt vejr"
+}

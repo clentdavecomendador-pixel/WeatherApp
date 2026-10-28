@@ -1,14 +1,16 @@
-import { initWeather } from "./controller/geoLocationcallback.js"
+import { startWeatherForecast } from "./controller/geoLocationcallback.js"
 import { headerView } from "./views/header.js"
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js")
-    console.log("App: service worker registered")
+    navigator.serviceWorker.register("./sw.js").catch((error) => {
+        console.error("Service worker registration failed.", error)
+    })
 }
 
 const app = document.getElementById("app")
 
-const forecast = document.createElement("div")
-forecast.id = "forecast"
+const main = document.createElement("main")
+main.id = "forecast"
 
-app.append(headerView(), initWeather())
+app.append(headerView(), main)
+startWeatherForecast(main)

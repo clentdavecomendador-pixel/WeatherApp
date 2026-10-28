@@ -1,3 +1,5 @@
+import { getWeatherIcon, getWeatherDescription } from "./weatherIcons.js"
+
 export function todaysWeather(myData, myParentData, myDate) {
     // This allow me to display a date
     // Which is why it's empty
@@ -5,7 +7,7 @@ export function todaysWeather(myData, myParentData, myDate) {
 
     console.log(myData)
     // If given a date then it will be in displayDate
-    if(myDate) {
+    if (myDate) {
         displayDate = myDate
     } else {
         // If not given a date use today's date to be displayed
@@ -29,13 +31,47 @@ export function todaysWeather(myData, myParentData, myDate) {
     console.log(today)
 
     let todaysCard = document.createElement("section")
+    todaysCard.className = "today-card"
 
-    let todaysWeatherIcon = document.createElement(today.weather_code)
+    // This will display the date that was selected for the card
+    let heading = document.createElement("h2")
+    heading.textContent = `I dag · ${displayDate}`
 
-    todaysCard.innerHTML`<img src = "${todaysWeatherIcon}">
-        <h2>${today.temp_max}</h2> <h4>${today.temp_min}</h4>
-    `
+    // This will display the weather icon and the weather type for the day
+    let condition = document.createElement("p")
+    condition.className = "weather-condition"
+    let todaysWeatherIcon = document.createElement("img")
+    todaysWeatherIcon.src = getWeatherIcon(today.weather_code)
+    todaysWeatherIcon.alt = getWeatherDescription(today.weather_code)
+    condition.append(todaysWeatherIcon, document.createTextNode(getWeatherDescription(today.weather_code)))
 
+    let weatherDetails = document.createElement("div")
+    weatherDetails.className = "weather-metrics"
+
+    // This will make one label and value for each weather detail
+    const addMetric = (label, value) => {
+        const metric = document.createElement("p")
+        metric.className = "weather-metric"
+        const name = document.createElement("span")
+        name.textContent = label
+        const reading = document.createElement("strong")
+        reading.textContent = value
+        metric.append(name, reading)
+        weatherDetails.append(metric)
+    }
+
+    // These are the minimum details needed to show today's weather
+    addMetric("Temperatur nu", `${today.current_temperature ?? today.temp_max} °C`)
+    addMetric("Dagens min. / maks.", `${today.temp_min} / ${today.temp_max} °C`)
+    addMetric("Vindstyrke (10 m)", `${today.wind_speed_max} m/s`)
+    addMetric("Vindretning", `${today.wind_direction}°`)
+    addMetric("Nedbør", `${today.current_precipitation ?? today.precipitation_sum} mm`)
+    addMetric("Nedbørssandsynlighed", `${today.precipitation_probability_max ?? "—"} %`)
+    addMetric("Regn / sne", `${today.rain_sum} / ${today.snowfall_sum} mm`)
+
+    todaysCard.append(heading, condition, weatherDetails)
+
+    // This will clear the old weather and display today's card
     myParentData.innerHTML = ""
     myParentData.append(todaysCard)
 

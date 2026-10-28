@@ -1,17 +1,137 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: 0 1rem 2rem;
     min-height: 100vh;
-    background: linear-gradient(20deg, #0D47A1, #E3F2FD);
+    background: linear-gradient(160deg, #0d47a1, #e3f2fd 70%);
     font-family: "Inter", sans-serif;
+    color: #10233f;
 }
 
 header {
     text-align: center;
+    padding: 1.5rem 0;
 
     h1 {
         color: #FFFFFF;
         margin: 0;
-        padding: 1rem;
+        font-size: clamp(2rem, 5vw, 3rem);
     }
+}
+
+#forecast {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+}
+
+#forecast > h2 {
+    color: white;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.today-card,
+.forecast-card {
+    background: rgb(255 255 255 / 94%);
+    border: 1px solid rgb(255 255 255 / 70%);
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgb(15 40 75 / 14%);
+    padding: 1rem;
+}
+
+.today-card {
+    padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.today-card h3,
+.forecast-card h3 {
+    margin: 0 0 0.75rem;
+    text-transform: capitalize;
+}
+
+.weather-condition {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.weather-condition img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.weather-condition .today-icon {
+    width: 4rem;
+    height: 4rem;
+}
+
+.weather-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem 1rem;
+}
+
+.weather-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin: 0;
+}
+
+.weather-metric span {
+    color: #53647b;
+    font-size: 0.85rem;
+}
+
+.weather-metric strong {
+    font-size: 1.05rem;
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: 1rem;
+}
+
+.day-details {
+    margin-top: 1rem;
+    border-top: 1px solid #dce5ef;
+    padding-top: 0.75rem;
+}
+
+.day-details summary {
+    cursor: pointer;
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+.hourly-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.hourly-item {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f1f6fc;
+    border-radius: 0.75rem;
+}
+
+.hourly-item h4 {
+    margin: 0;
+}
+
+.hourly-item img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.error-message {
+    background: #fff;
+    border-radius: 0.75rem;
+    color: #8b1e1e;
+    padding: 1rem;
 }
