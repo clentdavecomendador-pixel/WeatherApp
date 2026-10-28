@@ -2,15 +2,13 @@ import { initWeather } from "./controller/geoLocationcallback.js"
 import { headerView } from "./views/header.js"
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js").catch((error) => {
-        console.error("Service worker registration failed.", error)
-    })
+    navigator.serviceWorker.register("./sw.js")
+    console.log("App: service worker registered")
 }
 
 const app = document.getElementById("app")
 
-if (!app) {
-    throw new Error("The app root element was not found.")
-}
+const forecast = document.createElement("div")
+forecast.id = "forecast"
 
 app.append(headerView(), initWeather())
